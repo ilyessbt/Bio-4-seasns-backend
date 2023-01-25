@@ -24,6 +24,7 @@ export class ProductService {
 
     updateProduct(id: number, productPost: CreateProductDto): Observable<UpdateResult> { //Observable laa33
         productPost.updatedAt = new Date();
+
         return from(this.ProductPostRepository.update(id, productPost))
     }
 
