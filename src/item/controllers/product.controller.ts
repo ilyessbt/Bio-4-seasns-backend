@@ -6,7 +6,7 @@ import { IPaginationOptions } from 'nestjs-typeorm-paginate/dist/interfaces';
 import { Observable } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateProductDto } from '../dto/create-product.dto';
-import { ProductPostEntity } from '../models/post.entity';
+import { ProductPostEntity } from '../../models/post.entity';
 import { ProductService } from '../services/product.service';
 
 @Controller('product')

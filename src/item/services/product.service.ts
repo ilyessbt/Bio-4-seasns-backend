@@ -4,7 +4,7 @@ import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginat
 import { from, Observable } from 'rxjs';
 import { DeleteResult, FindOneOptions, Repository, UpdateResult } from 'typeorm';
 import { CreateProductDto } from '../dto/create-product.dto';
-import { ProductPostEntity } from '../models/post.entity';
+import { ProductPostEntity } from '../../models/post.entity';
 
 @Injectable()
 export class ProductService {

@@ -5,7 +5,7 @@ import { IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate/dis
 import { from, Observable } from 'rxjs';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCategorieDto } from '../dto/create-categorie.dto';
-import { CategoriePostEntity } from '../models/post.entity';
+import { CategoriePostEntity } from '../../models/post.entity';
 
 @Injectable()
 export class CategorieService {

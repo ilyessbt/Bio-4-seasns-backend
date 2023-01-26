@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, Length } from "class-validator";
-import { CategoriePostEntity } from "../models/post.entity";
+import { CategoriePostEntity } from "../../models/post.entity";
 
 export class CreateProductDto {
     @IsNotEmpty({ message: 'The Product should have a name' })
