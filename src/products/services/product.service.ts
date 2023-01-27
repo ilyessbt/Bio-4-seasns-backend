@@ -16,12 +16,26 @@ export class ProductService {
 
 
 
+
     async paginate(options: IPaginationOptions, name: string, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
 
 
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
-        queryBuilder.leftJoinAndSelect("q.categorie", "categorie")
-            .where('categorie.name = :name', { name })
+        const join = queryBuilder.leftJoinAndSelect("q.categorie", "categorie")
+
+        if (name != '') {
+            join.where('categorie.name = :name', { name })
+                .select('q.name')
+                .addSelect('q.urlImg')
+                .addSelect('q.price')
+                .addSelect('q.sellType')
+                .orderBy(`q.${order}`, orderC);
+
+        }
+        join.select('q.name')
+            .addSelect('q.urlImg')
+            .addSelect('q.price')
+            .addSelect('q.sellType')
             .orderBy(`q.${order}`, orderC);
         return paginate<ProductPostEntity>(queryBuilder, options);
     }
@@ -33,6 +47,11 @@ export class ProductService {
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
         queryBuilder.where("q.isTop = :isTop", { isTop: true })
             .andWhere("q.remainingQuantity > :remainingQuantity", { remainingQuantity: 0 })
+            .select('q.name')
+            .addSelect('q.urlImg')
+            .addSelect('q.price')
+            .addSelect('q.sellType')
+
             .orderBy("q.createdAt", "DESC")
 
 

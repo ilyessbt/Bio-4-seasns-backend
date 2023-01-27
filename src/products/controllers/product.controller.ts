@@ -3,9 +3,7 @@ import { Query, UsePipes } from '@nestjs/common/decorators';
 import { DefaultValuePipe, ParseIntPipe, ValidationPipe } from '@nestjs/common/pipes';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate/dist/interfaces';
-import { Observable } from 'rxjs';
-import { DeleteResult, UpdateResult } from 'typeorm';
-import { CreateProductDto } from '../dto/create-product.dto';
+
 import { ProductPostEntity } from '../models/product.entity';
 import { ProductService } from '../services/product.service';
 
@@ -14,12 +12,12 @@ export class ProductController {
     constructor(private productService: ProductService) { }
 
 
-
     @Get()
     async findAll(
-        @Query('orderby') orderby: string = 'price',
-        @Query('way') way: "DESC" | "ASC" = 'ASC',
-        @Query('categorie') categorie: string = 'legumes',
+        @Query('orderby') orderby: string = 'createdAt',
+        @Query('way') way: "DESC" | "ASC" = 'DESC',
+        @Query('categorie') categorie: string = '',
+
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit', new DefaultValuePipe(12), ParseIntPipe) limit: number = 12,
     ): Promise<Pagination<ProductPostEntity>> {
