@@ -14,29 +14,43 @@ export class ProductController {
     constructor(private productService: ProductService) { }
 
 
-    @Post()
-    @UsePipes(ValidationPipe)
-    create(@Body() post: CreateProductDto) {
-        this.productService.createProduct(post)
-        return { data: post };
-    }
 
     @Get()
     async findAll(
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 1,
+        @Query('limit', new DefaultValuePipe(12), ParseIntPipe) limit: number = 12,
     ): Promise<Pagination<ProductPostEntity>> {
         const options: IPaginationOptions = {
             limit,
             page,
         };
-        return await this.productService.paginate(options);
+        return await this.productService.paginate(options, 'price', 'DESC');
     }
 
-    @Get(':id')
-    async getProductById(@Param('id', ParseIntPipe) id: number): Promise<ProductPostEntity> {
-        return await this.productService.getProductById(id);
+    @Get('top')
+    async findAllTopProducts(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+        @Query('limit', new DefaultValuePipe(8), ParseIntPipe) limit: number = 8,
+    ): Promise<Pagination<ProductPostEntity>> {
+        const options: IPaginationOptions = {
+            limit,
+            page,
+        };
+        return await this.productService.paginateTopProducts(options);
     }
+
+    // @Post()
+    // @UsePipes(ValidationPipe)
+    // create(@Body() post: CreateProductDto) {
+    //     this.productService.createProduct(post)
+    //     return { data: post };
+    // }
+
+
+    // @Get(':id')
+    // async getProductById(@Param('id', ParseIntPipe) id: number): Promise<ProductPostEntity> {
+    //     return await this.productService.getProductById(id);
+    // }
 
     // async index(
     //     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -51,20 +65,20 @@ export class ProductController {
     // }
 
 
-    @Put(':id')
-    @UsePipes(ValidationPipe)
-    update(
-        @Param('id') id: number,
-        @Body() productPost: CreateProductDto
-    ) {
-        this.productService.updateProduct(id, productPost)
-        return { data: productPost }
-    }
+    // @Put(':id')
+    // @UsePipes(ValidationPipe)
+    // update(
+    //     @Param('id') id: number,
+    //     @Body() productPost: CreateProductDto
+    // ) {
+    //     this.productService.updateProduct(id, productPost)
+    //     return { data: productPost }
+    // }
 
-    @Delete(':id')
-    delete(@Param('id') id: number): Observable<DeleteResult> {
-        return this.productService.deleteProduct(id)
-    }
+    // @Delete(':id')
+    // delete(@Param('id') id: number): Observable<DeleteResult> {
+    //     return this.productService.deleteProduct(id)
+    // }
 
 }
 

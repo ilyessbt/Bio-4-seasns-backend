@@ -15,31 +15,40 @@ export class CategorieService {
         private readonly CategoriePostRepository: Repository<CategoriePostEntity>
     ) { }
 
-    createCategorie(productPost: CreateCategorieDto): Observable<CategoriePostEntity> {
-        return from(this.CategoriePostRepository.save(productPost));
-    }
-    findAllCategories(): Observable<CategoriePostEntity[]> {
-        return from(this.CategoriePostRepository.find());
+
+
+
+    findAllCategories(): Promise<CategoriePostEntity[]> {
+        const queryBuilder = this.CategoriePostRepository.createQueryBuilder('categorie');
+        queryBuilder.innerJoin('categorie.products', 'product')
+            .select('categorie.name')
+        return queryBuilder.getMany();
 
     }
 
-    updateCategorie(id: number, categoriePost: CreateCategorieDto): Observable<UpdateResult> {
-        categoriePost.updatedAt = new Date();
-        return from(this.CategoriePostRepository.update(id, categoriePost))
-    }
+    // createCategorie(productPost: CreateCategorieDto): Observable<CategoriePostEntity> {
+    //     return from(this.CategoriePostRepository.save(productPost));
+    // }
 
-    deleteCategorie(id: number): Observable<DeleteResult> {
-        return from(this.CategoriePostRepository.delete(id))
+    // updateCategorie(id: number, categoriePost: CreateCategorieDto): Observable<UpdateResult> {
+    //     categoriePost.updatedAt = new Date();
+    //     return from(this.CategoriePostRepository.update(id, categoriePost))
+    // }
 
-    }
+    // deleteCategorie(id: number): Observable<DeleteResult> {
+    //     return from(this.CategoriePostRepository.delete(id))
 
-    async paginate(options: IPaginationOptions): Promise<Pagination<CategoriePostEntity>> {
-        const queryBuilder = this.CategoriePostRepository.createQueryBuilder('q');
-        queryBuilder.orderBy('q.idCategorie', 'ASC');
-        return paginate<CategoriePostEntity>(queryBuilder, options);
-    }
-    async getCategorieById(id: number): Promise<CategoriePostEntity> {
-        return this.CategoriePostRepository.findOne({ where: { idCategorie: id } })
-    }
+    // }
+    // async paginate(options: IPaginationOptions): Promise<Pagination<CategoriePostEntity>> {
+    //     const queryBuilder = this.CategoriePostRepository.createQueryBuilder('categorie');
+    //     queryBuilder.innerJoin('categorie.products', 'product')
+    //         .select('categorie.name')
+    //     return queryBuilder.getMany();
+    // }
+
+
+    // async getCategorieById(id: number): Promise<CategoriePostEntity> {
+    //     return this.CategoriePostRepository.findOne({ where: { idCategorie: id } })
+    // }
 
 }

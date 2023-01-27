@@ -9,43 +9,38 @@ import { CategorieService } from '../services/categorie.service';
 @Controller('categorie')
 export class CategorieController {
     constructor(private categorieService: CategorieService) { }
-    @Post()
-    @UsePipes(ValidationPipe)
 
-    create(@Body() post: CreateCategorieDto) {
-        this.categorieService.createCategorie(post);
-        return { data: post }
-    }
+
+
     @Get()
-    async findAll(
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 1,
-    ): Promise<Pagination<CategoriePostEntity>> {
-        const options: IPaginationOptions = {
-            limit,
-            page,
-        };
-        return await this.categorieService.paginate(options);
+    async findAll(): Promise<CategoriePostEntity[]> {
+        return this.categorieService.findAllCategories();
     }
 
-    @Get(':id')
-    async getCategorieById(@Param('id', ParseIntPipe) id: number): Promise<CategoriePostEntity> {
-        return await this.categorieService.getCategorieById(id);
-    }
+    // @Post()
+    // @UsePipes(ValidationPipe)
+    // create(@Body() post: CreateCategorieDto) {
+    //     this.categorieService.createCategorie(post);
+    //     return { data: post }
+    // }
+    // @Get(':id')
+    // async getCategorieById(@Param('id', ParseIntPipe) id: number): Promise<CategoriePostEntity> {
+    //     return await this.categorieService.getCategorieById(id);
+    // }
 
-    @Put(':id')
-    @UsePipes(ValidationPipe)
+    // @Put(':id')
+    // @UsePipes(ValidationPipe)
 
-    update(
-        @Param('id') id: number,
-        @Body() categoriePost: CreateCategorieDto
-    ) {
-        this.categorieService.updateCategorie(id, categoriePost)
-        return { data: categoriePost }
-    }
+    // update(
+    //     @Param('id') id: number,
+    //     @Body() categoriePost: CreateCategorieDto
+    // ) {
+    //     this.categorieService.updateCategorie(id, categoriePost)
+    //     return { data: categoriePost }
+    // }
 
-    @Delete(':id')
-    delete(@Param('id') id: number): Observable<DeleteResult> {
-        return this.categorieService.deleteCategorie(id)
-    }
+    // @Delete(':id')
+    // delete(@Param('id') id: number): Observable<DeleteResult> {
+    //     return this.categorieService.deleteCategorie(id)
+    // }
 }
