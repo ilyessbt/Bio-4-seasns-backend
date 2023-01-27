@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateCategorieDto } from '../dto/create-categorie.dto';
 import { CategoriePostEntity } from '../models/categorie.entity';
+import { ProductPostEntity } from '../models/product.entity';
 import { CategorieService } from '../services/categorie.service';
 
 @Controller('categorie')
@@ -16,6 +17,9 @@ export class CategorieController {
     async findAll(): Promise<CategoriePostEntity[]> {
         return this.categorieService.findAllCategories();
     }
+
+
+
 
     // @Post()
     // @UsePipes(ValidationPipe)

@@ -17,6 +17,9 @@ export class ProductController {
 
     @Get()
     async findAll(
+        @Query('orderby') orderby: string = 'price',
+        @Query('way') way: "DESC" | "ASC" = 'ASC',
+        @Query('categorie') categorie: string = 'legumes',
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit', new DefaultValuePipe(12), ParseIntPipe) limit: number = 12,
     ): Promise<Pagination<ProductPostEntity>> {
@@ -24,7 +27,7 @@ export class ProductController {
             limit,
             page,
         };
-        return await this.productService.paginate(options, 'price', 'DESC');
+        return await this.productService.paginate(options, categorie, orderby, way);
     }
 
     @Get('top')

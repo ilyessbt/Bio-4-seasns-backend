@@ -6,13 +6,17 @@ import { from, Observable } from 'rxjs';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCategorieDto } from '../dto/create-categorie.dto';
 import { CategoriePostEntity } from '../models/categorie.entity';
+import { ProductPostEntity } from '../models/product.entity';
 
 @Injectable()
 export class CategorieService {
 
     constructor(
         @InjectRepository(CategoriePostEntity)
-        private readonly CategoriePostRepository: Repository<CategoriePostEntity>
+        private readonly CategoriePostRepository: Repository<CategoriePostEntity>,
+        @InjectRepository(ProductPostEntity)
+        private readonly ProductPostRepository: Repository<ProductPostEntity>
+
     ) { }
 
 
@@ -22,9 +26,13 @@ export class CategorieService {
         const queryBuilder = this.CategoriePostRepository.createQueryBuilder('categorie');
         queryBuilder.innerJoin('categorie.products', 'product')
             .select('categorie.name')
+
         return queryBuilder.getMany();
 
     }
+
+
+
 
     // createCategorie(productPost: CreateCategorieDto): Observable<CategoriePostEntity> {
     //     return from(this.CategoriePostRepository.save(productPost));

@@ -16,11 +16,19 @@ export class ProductService {
 
 
 
-    async paginate(options: IPaginationOptions, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
+    async paginate(options: IPaginationOptions, name: string, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
+
+
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
-        queryBuilder.orderBy(`q.${order}`, orderC);
+        queryBuilder.leftJoinAndSelect("q.categorie", "categorie")
+            .where('categorie.name = :name', { name })
+            .orderBy(`q.${order}`, orderC);
         return paginate<ProductPostEntity>(queryBuilder, options);
     }
+
+
+
+
     async paginateTopProducts(options: IPaginationOptions): Promise<Pagination<ProductPostEntity>> {
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
         queryBuilder.where("q.isTop = :isTop", { isTop: true })
