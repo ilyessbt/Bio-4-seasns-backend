@@ -1,24 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
-@Entity('categorie')
-export class CategoriePostEntity {
-    @PrimaryGeneratedColumn()
-    idCategorie: number;
+import { CategoriePostEntity } from './categorie.entity';
 
-    @Column({ default: '' })
-    name: string;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    updatedAt: Date;
-
-    @OneToMany(() => ProductPostEntity, product => product.categorie)
-    products: ProductPostEntity[];
-
-
-
-}
 
 @Entity('product')
 export class ProductPostEntity {
@@ -55,5 +37,3 @@ export class ProductPostEntity {
 
 
 }
-
-

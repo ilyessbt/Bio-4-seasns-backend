@@ -3,7 +3,7 @@ import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 import { Observable } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateCategorieDto } from '../dto/create-categorie.dto';
-import { CategoriePostEntity } from '../../models/post.entity';
+import { CategoriePostEntity } from '../models/categorie.entity';
 import { CategorieService } from '../services/categorie.service';
 
 @Controller('categorie')

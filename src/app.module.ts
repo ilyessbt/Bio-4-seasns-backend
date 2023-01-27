@@ -3,8 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItemModule } from './item/items.module';
-import { AddvModule } from './addv/addv.module';
+import { ProductsModule } from './products/products.module';
+import { AdvertisementModule } from './advertisement/addv.module';
 
 @Module({
   imports: [
@@ -20,8 +20,8 @@ import { AddvModule } from './addv/addv.module';
       synchronize: true,
       logging: ['error', 'query']
     }),
-    ItemModule,
-    AddvModule
+    ProductsModule,
+    AdvertisementModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { ProductService } from './services/product.service';
 import { ProductController } from './controllers/product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CategoriePostEntity, ProductPostEntity } from '../models/post.entity';
 import { CategorieController } from './controllers/categorie.controller';
 import { CategorieService } from './services/categorie.service';
+import { ProductPostEntity } from './models/product.entity';
+import { CategoriePostEntity } from './models/categorie.entity';
 
 @Module({
   imports: [
@@ -15,4 +16,4 @@ import { CategorieService } from './services/categorie.service';
   providers: [ProductService, CategorieService],
   controllers: [ProductController, CategorieController]
 })
-export class ItemModule { }
+export class ProductsModule { }
