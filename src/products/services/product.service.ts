@@ -4,27 +4,31 @@ import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginat
 import { from, Observable } from 'rxjs';
 import { DeleteResult, FindOneOptions, Repository, UpdateResult } from 'typeorm';
 import { CreateProductDto } from '../dto/create-product.dto';
+import { CategoriePostEntity } from '../models/categorie.entity';
 import { ProductPostEntity } from '../models/product.entity';
+import { CategorieService } from './categorie.service';
 
 @Injectable()
 export class ProductService {
     constructor(
         @InjectRepository(ProductPostEntity)
-        private readonly ProductPostRepository: Repository<ProductPostEntity>
+        private readonly ProductPostRepository: Repository<ProductPostEntity>,
+        private categorieService: CategorieService
     ) { }
 
 
 
 
 
-    async paginate(options: IPaginationOptions, name: string, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
+    async paginate(options: IPaginationOptions, id: number, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
 
 
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
         const join = queryBuilder.leftJoinAndSelect("q.categorie", "categorie")
 
-        if (name != '') {
-            join.where('categorie.name = :name', { name })
+        if (id) {
+            const ids = Array.isArray(id) ? id : [id];
+            join.where(`"categorie"."idCategorie" IN (:...ids)`, { ids })
                 .select('q.name')
                 .addSelect('q.urlImg')
                 .addSelect('q.price')

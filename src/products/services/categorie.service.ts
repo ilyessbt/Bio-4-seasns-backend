@@ -22,12 +22,13 @@ export class CategorieService {
 
 
 
-    findAllCategories(): Promise<CategoriePostEntity[]> {
+    async findAllCategories(): Promise<CategoriePostEntity[]> {
         const queryBuilder = this.CategoriePostRepository.createQueryBuilder('categorie');
         queryBuilder.innerJoin('categorie.products', 'product')
-            .select('categorie.name')
+            .select('categorie.idCategorie')
+            .addSelect('categorie.name')
 
-        return queryBuilder.getMany();
+        return await queryBuilder.getMany();
 
     }
 
