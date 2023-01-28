@@ -1,10 +1,6 @@
-import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
-import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
-import { Observable } from 'rxjs';
-import { DeleteResult, UpdateResult } from 'typeorm';
-import { CreateCategorieDto } from '../dto/create-categorie.dto';
+import { Controller, Get } from '@nestjs/common';
+
 import { CategoriePostEntity } from '../models/categorie.entity';
-import { ProductPostEntity } from '../models/product.entity';
 import { CategorieService } from '../services/categorie.service';
 
 @Controller('categorie')
@@ -15,7 +11,7 @@ export class CategorieController {
 
     @Get()
     async findAll(): Promise<CategoriePostEntity[]> {
-        return this.categorieService.findAllCategories();
+        return this.categorieService.findAll();
     }
 
 

@@ -18,7 +18,6 @@ import { AdvertisementModule } from './advertisement/addv.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      logging: ['error', 'query']
     }),
     ProductsModule,
     AdvertisementModule

@@ -23,24 +23,24 @@ export class ProductService {
     async paginate(options: IPaginationOptions, id: number, order: string, orderC: "DESC" | "ASC"): Promise<Pagination<ProductPostEntity>> {
 
 
-        const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
-        const join = queryBuilder.leftJoinAndSelect("q.categorie", "categorie")
+        const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
+        queryBuilder.leftJoinAndSelect("product.categorie", "categorie")
 
         if (id) {
             const ids = Array.isArray(id) ? id : [id];
-            join.where(`"categorie"."idCategorie" IN (:...ids)`, { ids })
-                .select('q.name')
-                .addSelect('q.urlImg')
-                .addSelect('q.price')
-                .addSelect('q.sellType')
-                .orderBy(`q.${order}`, orderC);
+            queryBuilder.where(`"categorie"."idCategorie" IN (:...ids)`, { ids })
+                .select('product.name')
+                .addSelect('product.urlImg')
+                .addSelect('product.price')
+                .addSelect('product.sellType')
+                .orderBy(`product.${order}`, orderC);
 
         }
-        join.select('q.name')
-            .addSelect('q.urlImg')
-            .addSelect('q.price')
-            .addSelect('q.sellType')
-            .orderBy(`q.${order}`, orderC);
+        queryBuilder.select('product.name')
+            .addSelect('product.urlImg')
+            .addSelect('product.price')
+            .addSelect('product.sellType')
+            .orderBy(`product.${order}`, orderC);
         return paginate<ProductPostEntity>(queryBuilder, options);
     }
 
@@ -49,8 +49,8 @@ export class ProductService {
 
     async paginateTopProducts(options: IPaginationOptions): Promise<Pagination<ProductPostEntity>> {
         const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
-        queryBuilder.where("q.isTop = :isTop", { isTop: true })
-            .andWhere("q.remainingQuantity > :remainingQuantity", { remainingQuantity: 0 })
+        queryBuilder.where("q.isTop = true")
+            .andWhere("q.remainingQuantity > 0")
             .select('q.name')
             .addSelect('q.urlImg')
             .addSelect('q.price')

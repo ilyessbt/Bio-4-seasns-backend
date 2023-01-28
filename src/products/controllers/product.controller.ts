@@ -3,6 +3,7 @@ import { Query, UsePipes } from '@nestjs/common/decorators';
 import { DefaultValuePipe, ParseIntPipe, ValidationPipe } from '@nestjs/common/pipes';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate/dist/interfaces';
+import { PaginationDto } from 'src/shared dtos/pagination.dto';
 
 import { ProductPostEntity } from '../models/product.entity';
 import { ProductService } from '../services/product.service';
@@ -13,26 +14,22 @@ export class ProductController {
 
 
     @Get()
+    @UsePipes(ValidationPipe)
     async findAll(
-        @Query('orderby') orderby: string = 'createdAt',
-        @Query('way') way: "DESC" | "ASC" = 'DESC',
-        @Query('categorie') id: number,
-
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-        @Query('limit', new DefaultValuePipe(12), ParseIntPipe) limit: number = 12,
-    ): Promise<Pagination<ProductPostEntity>> {
+        @Query() queryParams: PaginationDto): Promise<Pagination<ProductPostEntity>> {
+        const { orderby = "createdAt", way = "DESC", categorie, page = 1, limit = 12 } = queryParams;
         const options: IPaginationOptions = {
             limit,
             page,
         };
-        return await this.productService.paginate(options, id, orderby, way);
+        return await this.productService.paginate(options, categorie, orderby, way);
     }
 
     @Get('top')
     async findAllTopProducts(
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-        @Query('limit', new DefaultValuePipe(8), ParseIntPipe) limit: number = 8,
+        @Query() queryParams: PaginationDto
     ): Promise<Pagination<ProductPostEntity>> {
+        const { limit = 8, page = 1 } = queryParams;
         const options: IPaginationOptions = {
             limit,
             page,

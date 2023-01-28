@@ -1,10 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, Unique } from 'typeorm';
 import { ProductPostEntity } from './product.entity';
 @Entity('categorie')
 export class CategoriePostEntity {
     @PrimaryGeneratedColumn()
     idCategorie: number;
-
+    @Unique(['name'])
     @Column({ default: '' })
     name: string;
 

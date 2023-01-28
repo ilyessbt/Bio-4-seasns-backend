@@ -22,7 +22,7 @@ export class CategorieService {
 
 
 
-    async findAllCategories(): Promise<CategoriePostEntity[]> {
+    async findAll(): Promise<CategoriePostEntity[]> {
         const queryBuilder = this.CategoriePostRepository.createQueryBuilder('categorie');
         queryBuilder.innerJoin('categorie.products', 'product')
             .select('categorie.idCategorie')

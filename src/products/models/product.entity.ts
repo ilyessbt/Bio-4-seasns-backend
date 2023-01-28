@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, Index } from 'typeorm';
 import { CategoriePostEntity } from './categorie.entity';
 
 
@@ -6,7 +6,7 @@ import { CategoriePostEntity } from './categorie.entity';
 export class ProductPostEntity {
     @PrimaryGeneratedColumn()
     idProduct: number;
-
+    @Index()
     @Column({ default: '' })
     name: string;
 
