@@ -18,8 +18,8 @@ export class AdvertisementService {
         const sysDate: Date = new Date();
         queryBuilder
             .where('add.start_date <= :sysDate', { sysDate })
-            .andWhere('add.end_date >= :sysDate', { sysDate });
-
+            .andWhere('add.end_date >= :sysDate', { sysDate })
+            .orderBy('add.start_date', 'DESC')
 
 
         return paginate<AdvertisementEntity>(queryBuilder, options);
