@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdvertisementController } from './controllers/addv.controller';
-import { AdvertisementService } from './services/addv.service';
-import { AdvertisementEntity } from './models/addv.entity';
+import { AdvertisementService } from './services/advertisement.service';
+import { AdvertisementEntity } from './models/advertisement.entity';
+import { AdvertisementController } from './controllers/advertisement.controller';
 
 @Module({
 

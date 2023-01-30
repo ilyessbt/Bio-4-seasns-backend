@@ -4,6 +4,7 @@ import { DefaultValuePipe, ParseIntPipe, ValidationPipe } from '@nestjs/common/p
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate/dist/interfaces';
 import { PaginationDto } from 'src/shared dtos/pagination.dto';
+import { getProductParams } from '../getParams/getProductParams.dto';
 
 import { ProductPostEntity } from '../models/product.entity';
 import { ProductService } from '../services/product.service';
@@ -16,7 +17,7 @@ export class ProductController {
     @Get()
     @UsePipes(ValidationPipe)
     async findAll(
-        @Query() queryParams: PaginationDto): Promise<Pagination<ProductPostEntity>> {
+        @Query() queryParams: getProductParams): Promise<Pagination<ProductPostEntity>> {
         const { orderby = "createdAt", way = "DESC", categorie, page = 1, limit = 12 } = queryParams;
         const options: IPaginationOptions = {
             limit,

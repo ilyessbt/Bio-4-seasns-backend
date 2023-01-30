@@ -1,17 +1,19 @@
 import { Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
-import { AdvertisementEntity } from '../models/addv.entity';
-import { AdvertisementService } from '../services/addv.service';
+import { PaginationDto } from 'src/shared dtos/pagination.dto';
+import { AdvertisementEntity } from '../models/advertisement.entity';
+import { AdvertisementService } from '../services/advertisement.service';
 
-@Controller('addv')
+@Controller('add')
 export class AdvertisementController {
     constructor(private AddvrService: AdvertisementService) { }
 
     @Get()
-    async findAllAddvrs(
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 1,
+    async findAll(
+        @Query() queryParams: PaginationDto
     ): Promise<Pagination<AdvertisementEntity>> {
+        const { limit = 1, page = 1 } = queryParams;
+
         const options: IPaginationOptions = {
             limit,
             page,

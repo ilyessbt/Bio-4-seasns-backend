@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { AdvertisementEntity } from '../models/addv.entity';
+import { AdvertisementEntity } from '../models/advertisement.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,8 +14,14 @@ export class AdvertisementService {
 
 
     async paginate(options: IPaginationOptions): Promise<Pagination<AdvertisementEntity>> {
-        const queryBuilder = this.AddvrRepository.createQueryBuilder('q');
-        queryBuilder.orderBy('q.id', 'ASC');
+        const queryBuilder = this.AddvrRepository.createQueryBuilder('add');
+        const sysDate: Date = new Date();
+        queryBuilder
+            .where('add.start_date <= :sysDate', { sysDate })
+            .andWhere('add.end_date >= :sysDate', { sysDate });
+
+
+
         return paginate<AdvertisementEntity>(queryBuilder, options);
     }
 }

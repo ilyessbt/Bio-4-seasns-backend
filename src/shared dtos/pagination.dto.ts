@@ -3,21 +3,6 @@ import { ParseInt } from "src/decorators/parseInt.dto";
 
 
 export class PaginationDto {
-
-    @IsOptional()
-    @IsString()
-    @IsIn(["price", "name", "remainingQuantity", "createdAt"])
-    orderby: string = "createdAt";
-
-    @IsOptional()
-    @IsIn(["DESC", "ASC"])
-    way: "DESC" | "ASC";
-
-    @IsOptional()
-    @ParseInt()
-    @IsInt()
-    categorie: number;
-
     @IsInt()
     @ParseInt()
     @Min(1)
@@ -30,4 +15,9 @@ export class PaginationDto {
     @Max(25)
     @IsOptional()
     limit: number;
+
+
+
+
+
 }
