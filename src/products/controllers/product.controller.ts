@@ -43,7 +43,7 @@ export class ProductController {
     // create(@Body() post: CreateProductDto) {
     //     this.productService.createProduct(post)
     //     return { data: post };
-    // }  
+    // }    
 
 
     @Get('details/:id')
