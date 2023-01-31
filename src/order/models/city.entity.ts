@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index, OneToMany } from 'typeorm';
+import { OrderEntity } from './order.entity';
 import { RegionEntity } from './region.entity';
 
 
@@ -15,11 +16,13 @@ export class CityEntity {
     createdAt: Date;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
+    @OneToMany(() => OrderEntity, order => order.city)
+    orders: OrderEntity[];
+
 
     @ManyToOne(() => RegionEntity, region => region.id)
     region: RegionEntity;
-    @Column()
-    Region_idRegion: number;
+
 
 
 

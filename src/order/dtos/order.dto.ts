@@ -19,11 +19,10 @@ export class OrderDto {
     readonly delivryAdressTwo: string;
     @IsOptional()
     readonly status: number;
-
-
-    @IsNumber()
     @IsNotEmpty()
-    readonly City_idCity: number;
+    readonly cityId: number;
+
+
 
 
     updatedAt?: Date;

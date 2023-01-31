@@ -6,11 +6,7 @@ import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 import { AdvertisementModule } from './advertisement/advertisement.module';
 import { OrderModule } from './order/order.module';
-import { OrderService } from './services/order/order.service';
-import { CityController } from './order/controllers/city.controller';
-import { CityService } from './order/services/city.service';
-import { RegionService } from './order/services/region.service';
-import { RegionController } from './order/controllers/region.controller';
+
 
 @Module({
   imports: [
@@ -29,7 +25,7 @@ import { RegionController } from './order/controllers/region.controller';
     AdvertisementModule,
     OrderModule
   ],
-  controllers: [AppController, CityController, RegionController],
-  providers: [AppService, OrderService, CityService, RegionService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule { }

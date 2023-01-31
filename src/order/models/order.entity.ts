@@ -9,13 +9,13 @@ export class OrderEntity {
     @Index()
     @Column({ default: '' })
     cltFullName: string;
-    @Column()
+    @Column({ default: '' })
     email: string;
     @Column({ default: 0 })
     cltPhone: number;
 
     @Column({ default: '' })
-    delivryAdressOne: number;
+    delivryAdressOne: string;
     @Column({ default: '' })
     delivryAdresstwo: string;
 
@@ -33,6 +33,6 @@ export class OrderEntity {
     city: CityEntity;
 
     @Column()
-    City_idCity: number;
+    cityId: number;
 
 }
