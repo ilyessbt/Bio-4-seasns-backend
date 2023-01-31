@@ -28,7 +28,9 @@ export class ProductService {
 
         if (id) {
             const ids = Array.isArray(id) ? id : [id];
-            queryBuilder.where(`"categorie"."idCategorie" IN (:...ids)`, { ids })
+            queryBuilder
+                .where(`"categorie"."idCategorie" IN (:...ids)`, { ids })
+                .andWhere("product.remainingQuantity > 0")
                 .select('product.name')
                 .addSelect('product.urlImg')
                 .addSelect('product.price')
@@ -36,7 +38,9 @@ export class ProductService {
                 .orderBy(`product.${order}`, orderC);
 
         }
-        queryBuilder.select('product.name')
+        queryBuilder
+            .where("product.remainingQuantity > 0")
+            .select('product.name')
             .addSelect('product.urlImg')
             .addSelect('product.price')
             .addSelect('product.sellType')
@@ -62,6 +66,20 @@ export class ProductService {
         return paginate<ProductPostEntity>(queryBuilder, options);
     }
 
+    async getProductDetails(id: number): Promise<ProductPostEntity> {
+        const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
+        queryBuilder.where('product.idProduct = :id', { id })
+            .andWhere("product.remainingQuantity > 0")
+            .select('product.name')
+            .addSelect('product.urlImg')
+            .addSelect('product.price')
+            .addSelect('product.sellType')
+            .addSelect('product.description')
+
+        return await queryBuilder.getOne();
+
+    }
+
     // findAllProducts(): Observable<ProductPostEntity[]> {
     //     return from(this.ProductPostRepository.find());
 
@@ -84,9 +102,7 @@ export class ProductService {
 
 
 
-    // async getProductById(id: number): Promise<ProductPostEntity> {
-    //     return this.ProductPostRepository.findOne({ where: { idProduct: id } })
-    // }
+
 
 
 

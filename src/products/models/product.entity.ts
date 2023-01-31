@@ -35,5 +35,8 @@ export class ProductPostEntity {
     @Column()
     categorieIdCategorie: number;
 
+    @Column({ default: '' })
+    description: string;
+
 
 }

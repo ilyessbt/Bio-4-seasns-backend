@@ -43,13 +43,13 @@ export class ProductController {
     // create(@Body() post: CreateProductDto) {
     //     this.productService.createProduct(post)
     //     return { data: post };
-    // }
+    // }  
 
 
-    // @Get(':id')
-    // async getProductById(@Param('id', ParseIntPipe) id: number): Promise<ProductPostEntity> {
-    //     return await this.productService.getProductById(id);
-    // }
+    @Get('details/:id')
+    async getProductDetails(@Param('id', ParseIntPipe) id: number): Promise<ProductPostEntity> {
+        return await this.productService.getProductDetails(id);
+    }
 
     // async index(
     //     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
