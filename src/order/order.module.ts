@@ -9,6 +9,7 @@ import { RegionEntity } from './models/region.entity';
 import { CityService } from './services/city.service';
 import { OrderService } from './services/order.service';
 import { RegionService } from './services/region.service';
+import { OrderProductService } from './services/order-product.service';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { RegionService } from './services/region.service';
 
   ],
   controllers: [OrderController, CityController, RegionController],
-  providers: [OrderService, CityService, RegionService]
+  providers: [OrderService, CityService, RegionService, OrderProductService]
 })
 export class OrderModule { }

@@ -51,6 +51,11 @@ export class ProductController {
         return await this.productService.getProductDetails(id);
     }
 
+    @Get('orders/:qte/:id')
+    async get(@Param('qte', ParseIntPipe) qte: number, @Param('id', ParseIntPipe) id: number) {
+        return this.productService.getProductTotal(qte, id);
+    }
+
     // async index(
     //     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     //     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,

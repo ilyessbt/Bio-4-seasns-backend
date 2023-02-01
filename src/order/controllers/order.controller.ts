@@ -8,7 +8,10 @@ export class OrderController {
     @Post()
     @UsePipes(ValidationPipe)
     create(@Body() order: OrderDto) {
-        this.orderService.create(order)
-        return { data: order };
+        return this.orderService.create(order)
+
     }
+
+
+
 }

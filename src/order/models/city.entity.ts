@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index, OneToMany, Unique } from 'typeorm';
 import { OrderEntity } from './order.entity';
 import { RegionEntity } from './region.entity';
 
@@ -7,7 +7,8 @@ import { RegionEntity } from './region.entity';
 export class CityEntity {
     @PrimaryGeneratedColumn()
     id: number;
-    @Index()
+    @Unique(['name'])
+
     @Column({ default: '' })
     name: string;
     @Column({ default: 0 })

@@ -1,17 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index, OneToMany } from 'typeorm';
+import { ProductPostEntity } from 'src/products/models/product.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm';
 import { CityEntity } from './city.entity';
-import { OrderProductEntity } from './order-product.entity';
+import { OrderEntity } from './order.entity';
 
 
-@Entity('order')
-export class OrderEntity {
+@Entity('orderProduct')
+export class OrderProductEntity {
     @PrimaryGeneratedColumn()
     id: number;
-    @Index()
+    @Column({ default: 0 })
+    qte: number;
     @Column({ default: '' })
-    cltFullName: string;
-    @Column({ default: '' })
-    email: string;
+
     @Column({ default: 0 })
     cltPhone: number;
 
@@ -31,8 +31,7 @@ export class OrderEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
 
-    @ManyToOne(() => CityEntity, city => city.id)
-    city: CityEntity;
+
 
     @Column()
     cityId: number;

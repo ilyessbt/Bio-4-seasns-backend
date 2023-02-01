@@ -12,4 +12,9 @@ export class CityController {
         return this.cityService.findAll(id)
     }
 
+    @Get('c/:id')
+    async findCity(@Param('id', ParseIntPipe) id: number): Promise<CityEntity> {
+        return this.cityService.getCityById(id);
+    }
+
 }

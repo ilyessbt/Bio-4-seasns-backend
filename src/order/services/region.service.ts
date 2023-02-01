@@ -21,4 +21,8 @@ export class RegionService {
         return await queryBuilder.getMany();
 
     }
+
+    async getRegionById(id: number): Promise<RegionEntity> {
+        return await this.RegionRepository.findOne({ where: { id: id } })
+    }
 }

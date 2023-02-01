@@ -80,6 +80,15 @@ export class ProductService {
 
     }
 
+    async getProductTotal(qte: number, id: number) {
+        const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
+        const total = await queryBuilder
+            .select(`sum(${qte} * product.price)`)
+            .where('product.idProduct = :id', { id })
+            .getRawOne()
+        return total.sum
+    }
+
     // findAllProducts(): Observable<ProductPostEntity[]> {
     //     return from(this.ProductPostRepository.find());
 
