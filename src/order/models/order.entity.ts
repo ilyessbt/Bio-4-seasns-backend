@@ -16,8 +16,9 @@ export class OrderEntity {
 
     @Column({ default: '' })
     delivryAdressOne: string;
+
     @Column({ default: '' })
-    delivryAdresstwo: string;
+    delivryAdressTwo: string;
 
     @Column({ default: 0 })
     status: number;
