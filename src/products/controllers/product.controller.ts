@@ -51,8 +51,9 @@ export class ProductController {
         return await this.productService.getProductDetails(id);
     }
 
-    @Get('orders/:qte/:id')
-    async get(@Param('qte', ParseIntPipe) qte: number, @Param('id', ParseIntPipe) id: number) {
+    @Get('total')
+    async get(@Query() queryParams: getProductParams) {
+        const { qte, id } = queryParams;
         return this.productService.getProductTotal(qte, id);
     }
 

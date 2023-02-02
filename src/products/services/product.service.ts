@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { from, Observable } from 'rxjs';
@@ -79,14 +79,25 @@ export class ProductService {
         return await queryBuilder.getOne();
 
     }
+    async getOneById(id: number): Promise<ProductPostEntity> {
+        return await this.ProductPostRepository.findOne({ where: { idProduct: id } })
+    }
 
     async getProductTotal(qte: number, id: number) {
-        const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
-        const total = await queryBuilder
-            .select(`sum(${qte} * product.price)`)
-            .where('product.idProduct = :id', { id })
-            .getRawOne()
-        return total.sum
+        const found: Promise<ProductPostEntity> = this.getOneById(id)
+
+        if (await found != null) {
+            const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
+            const total = await queryBuilder
+                .select(`sum(${qte} * product.price)`)
+                .where('product.idProduct = :id', { id })
+                .getRawOne()
+            return total.sum
+        } else {
+            throw new BadRequestException('Invalid Product id');
+        }
+
+
     }
 
 

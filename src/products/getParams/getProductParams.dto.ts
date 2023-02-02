@@ -16,4 +16,14 @@ export class getProductParams extends PaginationDto {
     @ParseInt()
     @IsInt()
     categorie: number;
+
+    @IsOptional()
+    @ParseInt()
+    @IsInt()
+    id: number;
+
+    @IsOptional()
+    @ParseInt()
+    @IsInt()
+    qte: number;
 }
