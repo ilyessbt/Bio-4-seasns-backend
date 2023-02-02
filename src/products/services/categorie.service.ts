@@ -1,12 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate/dist/interfaces';
-import { from, Observable } from 'rxjs';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { CreateCategorieDto } from '../dto/create-categorie.dto';
+import { Repository } from 'typeorm';
 import { CategoriePostEntity } from '../models/categorie.entity';
-import { ProductPostEntity } from '../models/product.entity';
 
 @Injectable()
 export class CategorieService {
@@ -14,8 +9,7 @@ export class CategorieService {
     constructor(
         @InjectRepository(CategoriePostEntity)
         private readonly CategoriePostRepository: Repository<CategoriePostEntity>,
-        @InjectRepository(ProductPostEntity)
-        private readonly ProductPostRepository: Repository<ProductPostEntity>
+
 
     ) { }
 

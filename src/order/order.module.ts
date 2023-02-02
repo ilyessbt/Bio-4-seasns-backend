@@ -10,7 +10,6 @@ import { CityService } from './services/city.service';
 import { OrderService } from './services/order.service';
 import { RegionService } from './services/region.service';
 import { OrderProductEntity } from './models/order-product.entity';
-import { Repository } from 'typeorm';
 
 
 @Module({

@@ -1,10 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { from, Observable } from 'rxjs';
-import { DeleteResult, FindOneOptions, Repository, UpdateResult } from 'typeorm';
-import { CreateProductDto } from '../dto/create-product.dto';
-import { CategoriePostEntity } from '../models/categorie.entity';
+import { Repository } from 'typeorm';
+;
 import { ProductPostEntity } from '../models/product.entity';
 import { CategorieService } from './categorie.service';
 
@@ -52,15 +50,15 @@ export class ProductService {
 
 
     async paginateTopProducts(options: IPaginationOptions): Promise<Pagination<ProductPostEntity>> {
-        const queryBuilder = this.ProductPostRepository.createQueryBuilder('q');
-        queryBuilder.where("q.isTop = true")
-            .andWhere("q.remainingQuantity > 0")
-            .select('q.name')
-            .addSelect('q.urlImg')
-            .addSelect('q.price')
-            .addSelect('q.sellType')
+        const queryBuilder = this.ProductPostRepository.createQueryBuilder('product');
+        queryBuilder.where("product.isTop = true")
+            .andWhere("product.remainingQuantity > 0")
+            .select('product.name')
+            .addSelect('product.urlImg')
+            .addSelect('product.price')
+            .addSelect('product.sellType')
 
-            .orderBy("q.createdAt", "DESC")
+            .orderBy("product.createdAt", "DESC")
 
 
         return paginate<ProductPostEntity>(queryBuilder, options);

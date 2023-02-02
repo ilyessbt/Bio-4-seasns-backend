@@ -1,15 +1,15 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class OrderProductDto {
-    @IsNotEmpty({ message: 'The field Fullname should not be empty' })
+    @IsNotEmpty()
     @IsNumber()
     qte: number;
-    @IsNotEmpty({ message: 'The field email should not be empty' })
+    @IsNotEmpty()
     @IsNumber()
     productPrice: number;
 
 
-    @IsNotEmpty({ message: 'The field phone number should not be empty' })
+    @IsNotEmpty()
     @IsString()
 
     name: string;

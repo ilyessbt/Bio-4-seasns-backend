@@ -1,7 +1,6 @@
 import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common/enums';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { CityEntity } from '../models/city.entity';
 import { RegionEntity } from '../models/region.entity';

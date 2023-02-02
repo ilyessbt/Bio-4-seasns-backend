@@ -1,6 +1,4 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { Get } from '@nestjs/common/decorators/http/request-mapping.decorator';
-import { OrderProductDto } from '../dtos/order-product.dto';
 import { OrderDto } from '../dtos/order.dto';
 import { OrderService } from '../services/order.service';
 
