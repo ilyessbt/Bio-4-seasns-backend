@@ -13,13 +13,7 @@ export class OrderProductDto {
     @IsString()
 
     name: string;
-    @IsNumber()
-    // don't work
 
-    orderId: number;
-    @IsNumber()
-    // don't work
-    productIdProduct: number;
 
 
 

@@ -16,12 +16,16 @@ export class OrderService {
 
     ) { }
 
+
+
     // fixed
-    async create(order: OrderDto): Promise<string> {
+    async create(order: OrderDto): Promise<OrderEntity> {
+        order.orderProducts.forEach((value) => {
+            return value.productPrice * value.qte
+        })
         const found: Promise<CityEntity> = this.cityService.getCityById(order.cityId)
         if (await found != null) {
-            this.OrderRepository.save(order);
-            return "Order Added";
+            return this.OrderRepository.save(order);
 
         } else {
             throw new BadRequestException('Invalid city id');

@@ -18,6 +18,7 @@ export class OrderProductEntity {
     createdAt: Date;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
+
     @ManyToOne(() => OrderEntity, order => order.id)
     order: OrderEntity;
     @ManyToOne(() => ProductPostEntity, product => product.idProduct)

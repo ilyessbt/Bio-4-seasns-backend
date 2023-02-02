@@ -1,4 +1,7 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Length } from "class-validator";
+import { ProductPostEntity } from "src/products/models/product.entity";
+import { OrderProductEntity } from "../models/order-product.entity";
+import { OrderProductDto } from "./order-product.dto";
 
 export class OrderDto {
     @IsNotEmpty({ message: 'The field Fullname should not be empty' })
@@ -32,9 +35,8 @@ export class OrderDto {
 
     readonly cityId: number;
 
-
-
-
+    readonly product: ProductPostEntity;
+    readonly orderProducts: OrderProductEntity[];
     updatedAt?: Date;
 
 }

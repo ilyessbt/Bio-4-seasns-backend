@@ -9,7 +9,6 @@ import { RegionEntity } from './models/region.entity';
 import { CityService } from './services/city.service';
 import { OrderService } from './services/order.service';
 import { RegionService } from './services/region.service';
-import { OrderProductService } from './services/order-product.service';
 import { OrderProductEntity } from './models/order-product.entity';
 import { Repository } from 'typeorm';
 
@@ -23,6 +22,6 @@ import { Repository } from 'typeorm';
 
   ],
   controllers: [OrderController, CityController, RegionController],
-  providers: [OrderService, CityService, RegionService, OrderProductService]
+  providers: [OrderService, CityService, RegionService]
 })
 export class OrderModule { }
