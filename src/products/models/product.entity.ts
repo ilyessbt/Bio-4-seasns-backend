@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm';
+import { OrderProductEntity } from 'src/order/models/order-product.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index, OneToMany } from 'typeorm';
 import { CategoriePostEntity } from './categorie.entity';
 
 
@@ -37,6 +38,7 @@ export class ProductPostEntity {
 
     @Column({ default: '' })
     description: string;
-
+    @OneToMany(() => OrderProductEntity, orderProduct => orderProduct.order)
+    orderProducts: OrderProductEntity[];
 
 }

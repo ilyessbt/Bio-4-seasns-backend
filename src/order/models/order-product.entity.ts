@@ -10,30 +10,19 @@ export class OrderProductEntity {
     id: number;
     @Column({ default: 0 })
     qte: number;
-    @Column({ default: '' })
-
     @Column({ default: 0 })
-    cltPhone: number;
-
+    productPrice: number;
     @Column({ default: '' })
-    delivryAdressOne: string;
-
-    @Column({ default: '' })
-    delivryAdressTwo: string;
-
-    @Column({ default: 0 })
-    status: number;
-
-
-
+    name: string;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
+    @ManyToOne(() => OrderEntity, order => order.id)
+    order: OrderEntity;
+    @ManyToOne(() => ProductPostEntity, product => product.idProduct)
+    product: ProductPostEntity;
 
 
-
-    @Column()
-    cityId: number;
 
 }

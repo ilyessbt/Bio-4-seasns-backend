@@ -10,13 +10,16 @@ import { CityService } from './services/city.service';
 import { OrderService } from './services/order.service';
 import { RegionService } from './services/region.service';
 import { OrderProductService } from './services/order-product.service';
+import { OrderProductEntity } from './models/order-product.entity';
+import { Repository } from 'typeorm';
+
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([OrderEntity]),
     TypeOrmModule.forFeature([CityEntity]),
-    TypeOrmModule.forFeature([RegionEntity])
-
+    TypeOrmModule.forFeature([RegionEntity]),
+    TypeOrmModule.forFeature([OrderProductEntity])
 
   ],
   controllers: [OrderController, CityController, RegionController],

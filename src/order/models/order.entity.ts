@@ -30,7 +30,8 @@ export class OrderEntity {
     createdAt: Date;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
-
+    @OneToMany(() => OrderProductEntity, orderProduct => orderProduct.order)
+    orderProducts: OrderProductEntity[];
     @ManyToOne(() => CityEntity, city => city.id)
     city: CityEntity;
 
