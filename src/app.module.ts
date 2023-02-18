@@ -3,7 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItemModule } from './item/items.module';
+import { ProductsModule } from './products/products.module';
+import { AdvertisementModule } from './advertisement/advertisement.module';
 
 @Module({
   imports: [
@@ -17,9 +18,9 @@ import { ItemModule } from './item/items.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      logging: ['error', 'query']
     }),
-    ItemModule
+    ProductsModule,
+    AdvertisementModule
   ],
   controllers: [AppController],
   providers: [AppService],

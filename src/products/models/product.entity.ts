@@ -1,30 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
-@Entity('categorie')
-export class CategoriePostEntity {
-    @PrimaryGeneratedColumn()
-    idCategorie: number;
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, Index } from 'typeorm';
+import { CategoriePostEntity } from './categorie.entity';
 
-    @Column({ default: '' })
-    name: string;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    updatedAt: Date;
-
-    @OneToMany(() => ProductPostEntity, product => product.categorie)
-    products: ProductPostEntity[];
-
-
-
-}
 
 @Entity('product')
 export class ProductPostEntity {
     @PrimaryGeneratedColumn()
     idProduct: number;
-
+    @Index()
     @Column({ default: '' })
     name: string;
 
@@ -53,7 +35,8 @@ export class ProductPostEntity {
     @Column()
     categorieIdCategorie: number;
 
+    @Column({ default: '' })
+    description: string;
+
 
 }
-
-
